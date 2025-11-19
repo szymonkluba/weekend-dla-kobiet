@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weekend dla kobiet - Karkonosze</title>
+    <!-- Dev instruction: reference original uploaded style file path -->
+    <link href="/mnt/data/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <header class="header">
+      <nav>
+        <span id="menu-toggle">&#9776;</span>
+        <ul id="menu">
+          <li><a href="#index">Start</a></li>
+          <li><a href="#about">O Nas</a></li>
+          <li><a href="#team">Zespół</a></li>
+          <li><a href="#offer">Oferta</a></li>
+          <li><a href="#gallery_main">Galeria</a></li>
+          <li><a href="#booking">Zarezerwuj</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="content">
+      <section id="index" class="bg-light">
+        <div class="section-content">
+          <img class="logo" id="hero-logo" src="uploads/logo.png" alt="Logo" />
+          <div id="hero-paragraphs"></div>
+          <a class="button" id="hero-button" href="#booking">Zarezerwuj swój wyjazd</a>
+        </div>
+      </section>
+
+      <section id="about" class="bg-dark">
+        <div class="section-content">
+          <h1 id="about-header"></h1>
+          <div class="about-content">
+            <div><img class="about-image" id="about-image" src="uploads/GIRLS-10.png" alt="Uczestniczki" /></div>
+            <div id="about-paragraphs"></div>
+          </div>
+        </div>
+      </section>
+
+      <section id="team" class="bg-light">
+        <div class="section-content">
+          <h1 id="team-header"></h1>
+          <div class="team-content" id="team-members"></div>
+        </div>
+      </section>
+
+      <section id="offer" class="bg-light">
+        <div class="section-content">
+          <h1 id="offer-header"></h1>
+          <div class="offer-content" id="offer-items"></div>
+        </div>
+      </section>
+
+      <section id="gallery_main" class="bg-light">
+        <div class="section-content">
+          <h1 id="gallery_main-header"></h1>
+          <div class="offer-item-gallery-images" id="gallery-main-images"></div>
+        </div>
+      </section>
+
+      <section id="gallery_food" class="bg-light">
+        <div class="section-content">
+          <h1 id="gallery_food-header"></h1>
+          <div class="offer-item-gallery-images" id="gallery-food-images"></div>
+        </div>
+      </section>
+
+      <section id="gallery_stay" class="bg-light">
+        <div class="section-content">
+          <h1 id="gallery_stay-header"></h1>
+          <div class="offer-item-gallery-images" id="gallery-stay-images"></div>
+        </div>
+      </section>
+
+      <section id="booking" class="bg-light">
+        <div class="section-content">
+          <h1 id="booking-header"></h1>
+          <a class="button" id="booking-button" href="#">Zarezerwuj swój wyjazd</a>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      async function loadContent() {
+        try {
+          const res = await fetch('/content.json');
+          const data = await res.json();
+
+          const hero = data.hero || {subheader:[], button_text:'Zarezerwuj'};
+          const heroParagraphs = document.getElementById('hero-paragraphs');
+          heroParagraphs.innerHTML = '';
+          (hero.subheader || []).forEach(function(p) {
+            var el = document.createElement('p'); el.className='title-page'; el.textContent=p; heroParagraphs.appendChild(el);
+          });
+          document.getElementById('hero-button').textContent = hero.button_text || 'Zarezerwuj';
+
+          document.getElementById('about-header').textContent = data.about.header || '';
+          var aboutPar = document.getElementById('about-paragraphs'); aboutPar.innerHTML='';
+          (data.about.paragraphs || []).forEach(function(p){var el=document.createElement('p'); el.textContent=p; aboutPar.appendChild(el);});
+
+          document.getElementById('team-header').textContent = data.team.header || '';
+          var teamMembers = document.getElementById('team-members'); teamMembers.innerHTML='';
+          (data.team.members || []).forEach(function(m){
+            var card=document.createElement('div'); card.className='team-member-card';
+            var img=document.createElement('img'); img.className='team-member-image'; img.src=m.image?('/uploads/'+m.image):'uploads/placeholder-team.png'; img.alt=m.name||'';
+            var h2=document.createElement('h2'); h2.textContent=m.name||'';
+            var hr=document.createElement('hr');
+            var p=document.createElement('p'); p.className='team-member-bio'; p.textContent=m.bio||'';
+            card.appendChild(img); card.appendChild(h2); card.appendChild(hr); card.appendChild(p);
+            teamMembers.appendChild(card);
+          });
+
+          document.getElementById('offer-header').textContent = data.offer.header || '';
+          var offerItems = document.getElementById('offer-items'); offerItems.innerHTML='';
+          (data.offer.offers || []).forEach(function(it){
+            var item=document.createElement('div'); item.className='offer-item';
+            if(it.image){var img=document.createElement('img'); img.className='offer-item-image'; img.src='/uploads/'+it.image; img.alt=it.title||''; item.appendChild(img);}
+            var h2=document.createElement('h2'); h2.textContent=it.title||'';
+            var hr=document.createElement('hr');
+            var p=document.createElement('p'); p.className='offer-item-description'; p.textContent=it.description||'';
+            item.appendChild(h2); item.appendChild(hr); item.appendChild(p); offerItems.appendChild(item);
+          });
+
+          var fillGallery=function(key,containerId){
+            var head=document.getElementById(key+'-header'); head.textContent=(data[key]||{}).header||'';
+            var cont=document.getElementById(containerId); cont.innerHTML='';
+            ((data[key]||{}).gallery||[]).forEach(function(img){var el=document.createElement('img'); el.src='/uploads/'+img.image; el.alt=img.alt||''; cont.appendChild(el);});
+          };
+          fillGallery('gallery_main','gallery-main-images');
+          fillGallery('gallery_food','gallery-food-images');
+          fillGallery('gallery_stay','gallery-stay-images');
+
+          document.getElementById('booking-header').textContent = data.booking.header || '';
+          document.getElementById('booking-button').textContent = data.booking.button_text || 'Zarezerwuj';
+          document.getElementById('booking-button').href = data.booking.booking_url || '#';
+        } catch (e) { console.error('Could not load content.json', e); }
+      }
+      document.addEventListener('DOMContentLoaded', loadContent);
+    </script>
+  </body>
+</html>

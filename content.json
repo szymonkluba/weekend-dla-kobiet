@@ -1,0 +1,41 @@
+{
+  "hero": {
+    "subheader": [
+      "Wyjątkowe wyjazdy łączące psychologię, trening siłowy, jogę i kobido. Czas tylko dla Ciebie w otoczeniu górskiej przyrody."
+    ],
+    "button_text": "Zarezerwuj swój wyjazd"
+  },
+  "about": {
+    "header": "Twoja Podróż do Siebie",
+    "paragraphs": [
+      "W sercu Karkonoszy tworzymy przestrzeń, gdzie kobiety mogą odnaleźć równowagę między ciałem a umysłem. Nasze wyjazdy to unikalne połączenie pracy psychologicznej z aktywnością fizyczną.",
+      "Oferujemy holistyczne podejście do rozwoju osobistego, łącząc nowoczesne metody terapeutyczne z tradycyjnymi praktykami wellness. Każdy wyjazd to starannie zaplanowana podróż ku lepszemu poznaniu siebie.",
+      "Górski klimat Karkonoszy sprzyja refleksji i odnowie. To idealne miejsce, by zatrzymać się, odetchnąć i zainwestować w siebie."
+    ]
+  },
+  "team": {
+    "header": "Poznaj nasze prowadzące",
+    "members": []
+  },
+  "offer": {
+    "header": "Nasze specjalności",
+    "offers": []
+  },
+  "gallery_main": {
+    "header": "Galeria",
+    "gallery": []
+  },
+  "gallery_food": {
+    "header": "Wyżywienie",
+    "gallery": []
+  },
+  "gallery_stay": {
+    "header": "Zakwaterowanie",
+    "gallery": []
+  },
+  "booking": {
+    "header": "Zarezerwuj swój wyjazd",
+    "button_text": "Zarezerwuj swój wyjazd",
+    "booking_url": ""
+  }
+}

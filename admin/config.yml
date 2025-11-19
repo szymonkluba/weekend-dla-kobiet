@@ -1,0 +1,63 @@
+backend:
+  name: github
+  repo: "szymonkluba/weekend-dla-kobiet"
+  base_url: "https://api.github.com"
+  auth_type: implicit
+
+site_url: "https://szymonkluba.github.io/weekend-dla-kobiet/"
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "site"
+    label: "Strona"
+    files:
+      - file: "content.json"
+        label: "Zawartość strony"
+        name: "content-json"
+        fields:
+          - {label: "Hero - Akapity", name: "hero.subheader", widget: "list", field: {label: "Tekst", name: "text", widget: "text"}}
+          - {label: "Hero - Tekst przycisku", name: "hero.button_text", widget: "string"}
+          - {label: "About - Nagłówek", name: "about.header", widget: "string"}
+          - {label: "About - Akapity", name: "about.paragraphs", widget: "list", field: {label: "Tekst", name: "text", widget: "text"}}
+          - {label: "Team - Nagłówek", name: "team.header", widget: "string"}
+          - label: "Team - Członkowie"
+            name: "team.members"
+            widget: "list"
+            fields:
+              - {label: "Imię i nazwisko", name: "name", widget: "string"}
+              - {label: "Zdjęcie (upload)", name: "image", widget: "image"}
+              - {label: "Bio", name: "bio", widget: "text"}
+          - {label: "Offer - Nagłówek", name: "offer.header", widget: "string"}
+          - label: "Offer - Karty"
+            name: "offer.offers"
+            widget: "list"
+            fields:
+              - {label: "Tytuł", name: "title", widget: "string"}
+              - {label: "Obraz (upload)", name: "image", widget: "image"}
+              - {label: "Opis", name: "description", widget: "text"}
+          - {label: "Gallery Main - Nagłówek", name: "gallery_main.header", widget: "string"}
+          - label: "Galeria główna - zdjęcia"
+            name: "gallery_main.gallery"
+            widget: "list"
+            fields:
+              - {label: "Obraz", name: "image", widget: "image"}
+              - {label: "Alt", name: "alt", widget: "string"}
+          - {label: "Gallery Food - Nagłówek", name: "gallery_food.header", widget: "string"}
+          - label: "Galeria Wyżywienie - zdjęcia"
+            name: "gallery_food.gallery"
+            widget: "list"
+            fields:
+              - {label: "Obraz", name: "image", widget: "image"}
+              - {label: "Alt", name: "alt", widget: "string"}
+          - {label: "Gallery Stay - Nagłówek", name: "gallery_stay.header", widget: "string"}
+          - label: "Galeria Zakwaterowanie - zdjęcia"
+            name: "gallery_stay.gallery"
+            widget: "list"
+            fields:
+              - {label: "Obraz", name: "image", widget: "image"}
+              - {label: "Alt", name: "alt", widget: "string"}
+          - {label: "Booking - Nagłówek", name: "booking.header", widget: "string"}
+          - {label: "Booking - Tekst przycisku", name: "booking.button_text", widget: "string"}
+          - {label: "Booking - URL", name: "booking.booking_url", widget: "string"}
